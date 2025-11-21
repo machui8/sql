@@ -53,9 +53,17 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
-```
-Your answer...
-```
+***
+
+Answer:
+The propose for the table that overwrite changes is Type 1, Slowly Changing Dimension (SCD). The other propose for the table that retain changes is Type 2, Slowly Changing Dimension (SCD).
+
+Two proposed architectures are corrected. Both are needed for historial retention and current status overwriting purposes.
+
+For retain changes approach, insert a new record into table for any new changing, keeps status 'Active' with start date and end date (e.g. NULL or '31DEC9999'd) to indicate the records is valid. Change the old records' status to 'Inactive' with start date and end date to indicate the records is invalid. Finally, for unique identifier, pick each customer with status 'valid' and with latest end date.
+
+For overwrite changes approach, overwrite the past records with the latest one. Keep the most current and active status for each customer.
+For unique identifier, each customer should have only one record in the table.
 
 ***
 
